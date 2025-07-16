@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicidad en Internet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1000px;
+            height: 80vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 60px;
+            position: relative;
+            overflow-y: auto;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .author-info {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .author-info h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .author-info p {
+            color: #7f8c8d;
+            margin: 5px 0;
+        }
+
+        .hero-icon {
+            font-size: 4em;
+            text-align: center;
+            margin: 20px 0;
+            color: #3498db;
+        }
+
+        .definition {
+            background: #ecf0f1;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+        }
+
+        .definition p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+            justify-content: center;
+        }
+
+        .example-item {
+            background: #3498db;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .interactive-question {
+            background: #e8f4f8;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            border: 2px solid #3498db;
+        }
+
+        .interactive-question h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .interactive-question p {
+            font-size: 1.2em;
+            color: #34495e;
+            font-style: italic;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .comparison-column {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .comparison-column.traditional {
+            border-top: 5px solid #e74c3c;
+        }
+
+        .comparison-column.digital {
+            border-top: 5px solid #27ae60;
+        }
+
+        .comparison-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .comparison-column.traditional h3 {
+            color: #e74c3c;
+        }
+
+        .comparison-column.digital h3 {
+            color: #27ae60;
+        }
+
+        .comparison-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .comparison-item .icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .advantage-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border-left: 5px solid #27ae60;
+            transition: transform 0.3s ease;
+        }
+
+        .advantage-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .advantage-item .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #27ae60;
+        }
+
+        .advantage-item h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .advantage-item p {
+            color: #7f8c8d;
+            line-height: 1.5;
+        }
+
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .concept-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border-top: 3px solid #3498db;
+        }
+
+        .concept-item h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .concept-item p {
+            color: #7f8c8d;
+            line-height: 1.4;
+            font-size: 0.9em;
+        }
+
+        .activity-box {
+            background: #fff5f5;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 2px solid #e74c3c;
+        }
+
+        .activity-box h3 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .activity-scenario {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+
+        .strategy-options {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .strategy-option {
+            background: #3498db;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 150px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .strategy-option:hover {
+            background: #2980b9;
+        }
+
+        .summary-points {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .summary-points h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .summary-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .summary-points li {
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .summary-points li::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+
+        .bibliography {
+            margin-top: 40px;
+            padding: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+        }
+
+        .bibliography h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .bibliography p {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .control-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .control-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            color: #2c3e50;
+            z-index: 1000;
+        }
+
+        .mockup {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .mockup-phone {
+            display: inline-block;
+            width: 200px;
+            height: 350px;
+            background: #2c3e50;
+            border-radius: 25px;
+            padding: 20px;
+            margin: 20px;
+            position: relative;
+        }
+
+        .mockup-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .mockup-post {
+            text-align: left;
+            font-size: 0.8em;
+        }
+
+        .mockup-post h5 {
+            color: #e74c3c;
+            margin-bottom: 5px;
+        }
+
+        .mockup-post p {
+            color: #2c3e50;
+            margin: 5px 0;
+        }
+
+        .mockup-button {
+            background: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+                width: 95%;
+                height: 85vh;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+            
+            .advantages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .concepts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">7</span>
+        </div>
+
+        <!-- Slide 1: Portada -->
+        <div class="slide active">
+            <div class="hero-icon">📱💻</div>
+            <h1>Publicidad en Internet (Online)</h1>
+            <p class="subtitle">Comparación con publicidad tradicional</p>
+            
+            <div class="author-info">
+                <h3>Diego Córdova</h3>
+                <p><strong>Materia:</strong> Taller de Publicidad Digital y Online</p>
+                <p><strong>Semestre:</strong> 4º</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: ¿Qué es la publicidad en internet? -->
+        <div class="slide">
+            <h2>¿Qué es la publicidad en internet?</h2>
+            
+            <div class="definition">
+                <p>La publicidad en internet es el conjunto de estrategias y técnicas de marketing que utilizan plataformas digitales para promocionar productos, servicios o marcas a través de medios online.</p>
+            </div>
+
+            <div class="examples">
+                <div class="example-item">🌐 Redes Sociales</div>
+                <div class="example-item">🔍 Buscadores</div>
+                <div class="example-item">📝 Blogs</div>
+                <div class="example-item">🎥 Videos</div>
+            </div>
+
+            <div class="interactive-question">
+                <h3>Pregunta Interactiva</h3>
+                <p>"¿Prefieren anuncios en TV o en sus celulares?"</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Comparativa -->
+        <div class="slide">
+            <h2>Comparativa: Tradicional vs Digital</h2>
+            
+            <div class="comparison-table">
+                <div class="comparison-column traditional">
+                    <h3>📺 Publicidad Tradicional</h3>
+                    <div class="comparison-item">
+                        <div class="icon">📺</div>
+                        <span>Televisión</span>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="icon">📰</div>
+                        <span>Periódicos</span>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="icon">📻</div>
+                        <span>Radio</span>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="icon">🏢</div>
+                        <span>Vallas publicitarias</span>
+                    </div>
+                </div>
+                
+                <div class="comparison-column digital">
+                    <h3>💻 Publicidad Digital</h3>
+                    <div class="comparison-item">
+                        <div class="icon">📱</div>
+                        <span>Smartphones</span>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="icon">📘</div>
+                        <span>Redes sociales</span>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="icon">🔍</div>
+                        <span>Motores de búsqueda</span>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="icon">📧</div>
+                        <span>Email marketing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Ventajas -->
+        <div class="slide">
+            <h2>Ventajas de la publicidad digital</h2>
+            
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="icon">🎯</div>
+                    <h4>Segmentación precisa</h4>
+                    <p>Dirigir anuncios a audiencias específicas según edad, ubicación, intereses</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="icon">📊</div>
+                    <h4>Medición en tiempo real</h4>
+                    <p>Analizar resultados instantáneamente y ajustar estrategias</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="icon">💰</div>
+                    <h4>Costos accesibles</h4>
+                    <p>Presupuestos flexibles y optimización continua del gasto</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="icon">⚡</div>
+                    <h4>Cambios rápidos</h4>
+                    <p>Modificar campañas al instante sin costos adicionales</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="icon">🌎</div>
+                    <h4>Alcance global</h4>
+                    <p>Llegar a audiencias en cualquier parte del mundo</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="icon">📱</div>
+                    <h4>Formatos multimedia</h4>
+                    <p>Combinar texto, imágenes, video y audio interactivo</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Conceptos clave -->
+        <div class="slide">
+            <h2>Conceptos clave del marketing digital</h2>
+            
+            <div class="concepts-grid">
+                <div class="concept-item">
+                    <h4>CPC</h4>
+                    <p>Costo por clic - Modelo donde pagas solo cuando alguien hace clic en tu anuncio</p>
+                </div>
+                
+                <div class="concept-item">
+                    <h4>CPM</h4>
+                    <p>Costo por mil impresiones - Modelo donde pagas por cada mil veces que se muestra tu anuncio</p>
+                </div>
+                
+                <div class="concept-item">
+                    <h4>CTR</h4>
+                    <p>Tasa de clics - Porcentaje de personas que hacen clic en tu anuncio después de verlo</p>
+                </div>
+                
+                <div class="concept-item">
+                    <h4>Landing Page</h4>
+                    <p>Página de destino específica donde llegan los usuarios después de hacer clic en un anuncio</p>
+                </div>
+                
+                <div class="concept-item">
+                    <h4>Remarketing</h4>
+                    <p>Técnica para mostrar anuncios a personas que ya visitaron tu sitio web anteriormente</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Actividad -->
+        <div class="slide">
+            <h2>Mini actividad aplicada</h2>
+            
+            <div class="activity-box">
+                <h3>🍽️ Caso práctico</h3>
+                <div class="activity-scenario">
+                    <p><strong>Escenario:</strong> Promover un restaurante en Santa Cruz con Bs. 100</p>
+                </div>
+                
+                <div class="strategy-options">
+                    <div class="strategy-option">📘 Facebook Ads</div>
+                    <div class="strategy-option">📸 Instagram</div>
+                    <div class="strategy-option">🎵 TikTok</div>
+                </div>
+                
+                <div class="mockup">
+                    <h4>Mockup de anuncio en Instagram</h4>
+                    <div class="mockup-phone">
+                        <div class="mockup-screen">
+                            <div class="mockup-post">
+                                <h5>🍽️ Restaurante La Tradición</h5>
+                                <p>🌟 Comida cruceña auténtica</p>
+                                <p>📍 Santa Cruz, Bolivia</p>
+                                <p>💰 Menú desde Bs. 25</p>
+                                <button class="mockup-button">Ver Menú</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Cierre -->
+        <div class="slide">
+            <h2>Recapitulación</h2>
+            
+            <div class="summary-points">
+                <h3>Puntos clave</h3>
+                <ul>
+                    <li>La publicidad digital ofrece mayor precisión y medición</li>
+                    <li>Los costos son más accesibles y optimizables</li>
+                    <li>Permite cambios rápidos y alcance global</li>
+                    <li>Conceptos como CPC, CPM y CTR son fundamentales</li>
+                    <li>Las estrategias deben adaptarse al público objetivo</li>
+                </ul>
+            </div>
+
+            <div class="interactive-question">
+                <h3>Pregunta final</h3>
+                <p>"¿Por qué creen que es importante dominar la publicidad digital?"</p>
+            </div>
+
+            <div class="bibliography">
+                <h4>Bibliografía</h4>
+                <p>Sánchez (1999). • Gil (s.f.). • Tellis (1998). • Reyzábal (1995). • León (1995). • Merodio (2010). • Manual Google Sites (s.f.).</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="control-btn" onclick="prevSlide()">← Anterior</button>
+        <button class="control-btn" onclick="nextSlide()">Siguiente →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
